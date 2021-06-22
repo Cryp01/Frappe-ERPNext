@@ -137,3 +137,14 @@ Esperas a que inicie y Listo :smiley:
 #### Nota 
 
 Docker debe estar abierto e iniciado 
+
+# Extra Posible error de contraseña
+
+### Como solucionar el error de contraseña incorrecta al crear el sitio
+
+1. Nos vamos a la docker y abrimos `frappe_docker_devcontainer` dentro saldran varios contenedores nos vamos al de postgres `frappe_docker_devcontainer_postgresql_1` le damos abrir una cli
+2. pegamos el siguiente comando en la cli `psql postgres postgres`
+3. cuando estemos dentro de psql escribimos el siguiente comando: `\password postgres`
+4. escribimos la nueva contraseña en este caso `123` recuerden por la contraseña igual en el common_site_config.json
+5. Borrramos la carpeta de nuestro sitio fallido de la carpeta sites
+6. y volvemos a crear el sitio y seguir los mismos pasos de ahi en adelante
