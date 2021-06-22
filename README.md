@@ -97,7 +97,7 @@ luego de que cargue el acceso remoto al container ejecutamos los comandos
 1. `cd frappe-bench`
 2. `bench start`
 
-Esperas a que inicie y Listo :) <3
+Esperas a que inicie y Listo :smiley: :heart:
 
 #### Nota
 Docker debe estar abierto e iniciado
