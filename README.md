@@ -86,3 +86,18 @@ Ejecutamos el comando `bench start` esperamos un poco hasta que el watch termine
 ### Para acceder al sitio
 Para acceder el sitio ponemos la url de nuestro sitio por ejemplo `mysite.localhost` y el puerto `8000`
 quedaria algo asi `mysite.localhost:8000`
+
+
+
+# Extra como abrir el proyecto cuando ya esta instalado
+
+Vamos a la carpeta del Frappe-docker y abrimos con vscode, precionamos `ctrl+shift+p` y pegamos el comando `Remote Containers : Reopen in Container`
+
+luego de que cargue el acceso remoto al container ejecutamos los comandos
+1. `cd frappe-bench`
+2. `bench start`
+
+Esperas a que inicie y Listo :) <3
+
+#### Nota
+Docker debe estar abierto e iniciado
