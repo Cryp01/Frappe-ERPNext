@@ -137,6 +137,7 @@ Esperas a que inicie y Listo :smiley:
 #### Nota 
 
 Docker debe estar abierto e iniciado
+
 Debe iniciar session como administrador en erpnext para poder crear usuarios,
 
 Credenciales:
