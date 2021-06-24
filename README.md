@@ -31,6 +31,8 @@ Abrimos una terminal interna en vscode y pegamos y ejecutamos el siguiente coman
 
 Luego vamos a la carpeta `/devcontainer` y al archivo `docker-compose.yml`, modifica el servicio de mariadb 
  agregando este comando: `command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']`
+ 
+![image](https://user-images.githubusercontent.com/40186339/123316400-ca8bbc80-d4fa-11eb-98e7-523d68004ec9.png)
 
 
 En la terminal interna de vscode pegamos y ejecutamos el siguiente comando: `code --install-extension ms-vscode-remote.remote-containers` 
@@ -90,11 +92,13 @@ y al archivo `common_site_config.json` y eliminar `"maintenance mode":1`
 
 # Establecer el modo de desarrollador
 `bench --site mysite.localhost set-config developer_mode 1`
-`bench --site mysite.localhost clear-cache`
+
+ `bench --site mysite.localhost clear-cache`
 
 # Instacion de ErpNext
 `bench get-app --branch version-12 erpnext https://github.com/frappe/erpnext.git`
-`bench --site mysite.localhost install-app erpnext`
+
+ `bench --site mysite.localhost install-app erpnext`
 
 # Paso final 
 Ejecutamos el comando `bench start` esperamos un poco hasta que el watch termine de hacer el rebuild, esto no se presenta así que cuando aparezca  
