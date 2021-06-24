@@ -12,12 +12,16 @@
   
 
 ### Clonar el Repositorio 
-Accedemos a la consola de bash y pegamos y ejecutamos el siguiente comando: `git clone https://github.com/frappe/frappe_docker.git` 
+Accedemos a la consola de bash y pegamos y ejecutamos el siguiente comando:
+
+ `git clone https://github.com/frappe/frappe_docker.git` 
 
   
 
 ### Acceder a la Carpeta Del repositorio Clonado 
-En la misma consola de bash luego de haber clonado el repositorio pegamos y ejecutamos el siguiente comando: `cd frappe_docker` 
+En la misma consola de bash luego de haber clonado el repositorio pegamos y ejecutamos el siguiente comando:
+ 
+`cd frappe_docker` 
 
   
 
@@ -35,7 +39,9 @@ Luego vamos a la carpeta `/devcontainer` y al archivo `docker-compose.yml`, modi
 ![image](https://user-images.githubusercontent.com/40186339/123316400-ca8bbc80-d4fa-11eb-98e7-523d68004ec9.png)
 
 
-En la terminal interna de vscode pegamos y ejecutamos el siguiente comando: `code --install-extension ms-vscode-remote.remote-containers` 
+En la terminal interna de vscode pegamos y ejecutamos el siguiente comando:
+
+ `code --install-extension ms-vscode-remote.remote-containers` 
 
 Copiamos el comando: `Remote Containers : Reopen in Container` 
 
