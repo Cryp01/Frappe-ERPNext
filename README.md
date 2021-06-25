@@ -12,12 +12,16 @@
   
 
 ### Clonar el Repositorio 
-Accedemos a la consola de bash y pegamos y ejecutamos el siguiente comando: `git clone https://github.com/frappe/frappe_docker.git` 
+Accedemos a la consola de bash y pegamos y ejecutamos el siguiente comando:
+
+ `git clone https://github.com/frappe/frappe_docker.git` 
 
   
 
 ### Acceder a la Carpeta Del repositorio Clonado 
-En la misma consola de bash luego de haber clonado el repositorio pegamos y ejecutamos el siguiente comando: `cd frappe_docker` 
+En la misma consola de bash luego de haber clonado el repositorio pegamos y ejecutamos el siguiente comando:
+ 
+`cd frappe_docker` 
 
   
 
@@ -29,11 +33,15 @@ Para abrir vscode en la misma carpeta en la que estamos en bash ejecutamos el si
 
 Abrimos una terminal interna en vscode y pegamos y ejecutamos el siguiente comando: `cp -R devcontainer-example .devcontainer` 
 
-Luego vamos a la carpeta `/devcontainer` y al archivo `docker-compose.yml` y comentamos la configuración de mariadb  
+Luego vamos a la carpeta `/devcontainer` y al archivo `docker-compose.yml`, modifica el servicio de mariadb 
+ agregando este comando: `command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']`
+ 
+![image](https://user-images.githubusercontent.com/40186339/123316400-ca8bbc80-d4fa-11eb-98e7-523d68004ec9.png)
 
-y des comentamos la configuración de postgresql. 
 
-En la terminal interna de vscode pegamos y ejecutamos el siguiente comando: `code --install-extension ms-vscode-remote.remote-containers` 
+En la terminal interna de vscode pegamos y ejecutamos el siguiente comando:
+
+ `code --install-extension ms-vscode-remote.remote-containers` 
 
 Copiamos el comando: `Remote Containers : Reopen in Container` 
 
@@ -68,45 +76,19 @@ abrimos una terminal interna y procedemos a ejecutar los siguientes comandos en 
 
 8. `sed -i '/redis/d' ./Procfile` 
 
-9. `bench config set-common-config -c root_login postgres` 
-
-10. `bench config set-common-config -c root_password '"123"'` 
-
 ### Crear el sitio 
 
 Una vez hayamos ejecutado los comandos anteriores ejecutamos el siguiente comando cambiando el `{site}` por el nombre deseado 
-`bench new-site {site}.localhost --db-type postgres --db-host postgresql` 
+`bench new-site {site}.localhost  --no-mariadb-socket` 
 
 Ejemplo 
-`bench new-site mysitio.localhost --db-type postgres --db-host postgresql` 
+`bench new-site mysite.localhost --no-mariadb-socket` 
 
-Mientras este cargando el sitio le pedirá una contraseña de administrador 
+En la ejecucion te pedira la contraseña root de mariaDB es la que se especifica en el archivo `docker-compose.yml` ubicado en `/devcontainer`.
+Por defecto esta  contraseña es `123`
+
+luego cuando este terminado de crear el sitio le pedirá una contraseña de administrador 
 ahí colocamos `admin` 
-
-  
-
-### Actualizar y Migrar 
-Una vez hayamos creado el sitio tenemos que ejecutar el siguiente comando: `bench update` 
-
-  
-
-#### Nota  
-este comando suele tardar un poco. 
-
-  
-
-Una vez hayamos actualizado el sitio tenemos que ejecutar el siguiente comando cambiando la palabra  
-`{site.localhost}` por el nombre de tu site: `bench --site {site.localhost} migrate` 
-
-  
-
-Ejemplo: 
-`bench --site mysitio.localhost migrate` 
-
-  
-
-#### Nota  
-este comando suele tardar un poco. 
 
   
 
@@ -114,13 +96,23 @@ este comando suele tardar un poco.
 La frappe puede poner la aplicación en modo mantenimiento por default para quitarlo tenemos que ir a la carpeta `/sites`  
 y al archivo `common_site_config.json` y eliminar `"maintenance mode":1` 
 
+# Establecer el modo de desarrollador
+`bench --site mysite.localhost set-config developer_mode 1`
+
+ `bench --site mysite.localhost clear-cache`
+
+# Instacion de ErpNext
+`bench get-app --branch version-12 erpnext https://github.com/frappe/erpnext.git`
+
+ `bench --site mysite.localhost install-app erpnext`
+
 # Paso final 
 Ejecutamos el comando `bench start` esperamos un poco hasta que el watch termine de hacer el rebuild, esto no se presenta así que cuando aparezca  
-`Rebuilding data_import_tools.min.js` podemos acceder a nuestro sitio 
+`Rebuilding item-dashboard.min.js` podemos acceder a nuestro sitio 
 
 ### Para acceder al sitio 
-Para acceder el sitio ponemos la url de nuestro sitio por ejemplo `mysite.localhost` y el puerto `8000` 
-quedaría algo así `mysite.localhost:8000` 
+Para acceder el sitio ponemos la url de nuestro sitio por ejemplo `{site}.localhost` y el puerto `8000` 
+quedaría algo así `{site}.localhost:8000` 
 
 # Extra como abrir el proyecto cuando ya está instalado 
 
@@ -145,13 +137,4 @@ Credenciales:
 email: Administrator
 password: admin
 `
-# Extra Posible error de contraseña
-
-### Como solucionar el error de contraseña incorrecta al crear el sitio
-
-1. Nos vamos a la docker y abrimos `frappe_docker_devcontainer` dentro saldran varios contenedores nos vamos al de postgres `frappe_docker_devcontainer_postgresql_1` le damos abrir una cli
-2. pegamos el siguiente comando en la cli `psql postgres postgres`
-3. cuando estemos dentro de psql escribimos el siguiente comando: `\password postgres`
-4. escribimos la nueva contraseña en este caso `123` recuerden por la contraseña igual en el common_site_config.json
-5. Borrramos la carpeta de nuestro sitio fallido de la carpeta sites
-6. y volvemos a crear el sitio y seguir los mismos pasos de ahi en adelante
+Eliminar las imagenes y contenedeores que tengas en docker sobre frappe y erpnext
